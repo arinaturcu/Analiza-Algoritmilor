@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/arina/Desktop/ACS/Anul2/AA/problema_colorarii_algoritmi/coloring.cpp
+iostream
+-
+bits/stdc++.h
+-
+coloring_greedy.h
+/home/arina/Desktop/ACS/Anul2/AA/problema_colorarii_algoritmi/coloring_greedy.h
+coloring_backtracking.h
+/home/arina/Desktop/ACS/Anul2/AA/problema_colorarii_algoritmi/coloring_backtracking.h
+
+/home/arina/Desktop/ACS/Anul2/AA/problema_colorarii_algoritmi/coloring_backtracking.h
+
+/home/arina/Desktop/ACS/Anul2/AA/problema_colorarii_algoritmi/coloring_greedy.h
+bits/stdc++.h
+-
+

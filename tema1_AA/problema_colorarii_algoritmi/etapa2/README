@@ -1,0 +1,48 @@
+Arina-Emanuela Turcu 323CA
+
+======================= Colorarea nodurilor unui graf =========================
+	
+	Sunt implementati doi algoritmi, unul exact si unul greedy care isi
+propun sa gaseasca numarul cromatic al unui graf. Pentru ambii algoritmi graful
+este reprezentat cu ajutorul unei matrice de adiacenta. Datele de intrare sunt
+reprezentate astfel: pe prima linie se gasesc n (numarul de noduri) si m
+(numarul de muchii), apoi pe urmatoarele m linii, sunt date cele m muchii. 
+
+
+
+1. Algoritm exact (complexitat exponentiala)
+	Algoritmul exact este implementat in fisierul sursa 
+coloring_backtracking.cpp si foloseste metoda backtracking. Se iau numere
+incepand cu 1 pana la numarul de noduri si se verifica daca graful poate fi
+colorat cu acel numar de culori. Functia care verifica daca graful poate fi
+colorat cu k culori este functia check_backtracking().
+
+2. Algoritm greedy (complexitate polinomiala)
+	Algoritmul greedy este implementat in fisierul sursa
+coloring_greedy.cpp si functioneaza astfel: parcurge nodurile pe rand si
+incearca sa coloreze fiecere nod cu prima culoare disponibila (i.e. cea mai
+mica culoare care nu e folosita de niciun vecin). Functia se numeste 
+find_greedy.
+
+
+
+	Ambii algoritmi folosesc aceleasi teste pentru care exista un folder cu
+referinte si folosesc aceeasi cantitate de memorie. Algoritmul exact va afla
+mereu numarul cromatic corect, dar algoritmul greedy va returna uneori un numar 
+mai mare de culori decat numarul cromatic. In cazul algoritmului exact, 
+checkerul va afisa PASSED sau FAILED daca raspunsul este corect sau, respectiv, 
+gresit. In cazul algoritmului greedy, checkerul va afisa PASSED daca raspunsul 
+este corect sau eroarea relativa daca raspunusul nu este corect. 
+	Outputurile obtinute de algoritmul, dupa rularea testelor, se afla in
+folderul out_backtracking, iar outputurile obtinute de algoritmul greedy se
+afla in out_greedy.
+
+	S-au generat urmatoarele teste:
+- Test 1: graf foarte mic
+- Test 2: graf random
+- Test 3: graf random
+- Test 5: graf rar 
+- Test 6: graf dens
+- Test 7: graf bipartit la care algroitmul greedy va da raspuns mult eronat
+- Test 8: graf dens
+

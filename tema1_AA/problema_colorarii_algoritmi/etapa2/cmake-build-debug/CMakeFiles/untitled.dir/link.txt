@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/untitled.dir/coloring_greedy.cpp.o CMakeFiles/untitled.dir/coloring.cpp.o CMakeFiles/untitled.dir/coloring_backtracking.cpp.o  -o untitled 

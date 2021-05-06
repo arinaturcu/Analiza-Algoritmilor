@@ -1,0 +1,106 @@
+Turcu Arina Emanuela 323CA
+
+================================== TEMA 2 AA ==================================
+
+	Pentru toate task-urile, familiile au fost interpretate ca noduri ale
+unui graf, iar relatiile dintre familii ca niste muchii in graf. Graful a fost
+pastrat printr-o matrice de adiacenta numita graph. In continuare, N va fi
+numarul de noduri, iar M va fi numarul de muchii.
+
+1. Plantarea spionilor
+
+	Plantarea unui spion intr-o familie poate fi vazuta ca problema
+colorarii unui nod. Deci, pentru rezolvarea problemei am redus problema
+colorarii unui graf la SAT astfel: am construit o matrice de booleans P (in cod 
+matricea este numita variables) cu N linii si K coloane, unde N este numarul de 
+noduri, iar K este numarul de spioni si daca P(i, j) == true inseamna ca nodul i
+este colorat cu culoarea j si am tinut cont de urmatoarele seturi de clauze:
+	- fiecare nod trebuie sa aiba cel putin o culoare:
+	P(i, 1) | P(i, 2) | ... | P(i, K) = true
+	Acest set va produce N clauze in O(N*K).
+	
+	- fiecare nod trebuie sa aiba cel mult o culoare:
+	~(P(v, i) & P(v, j)) = true, unde v apartine intervalului [1, N] si
+	i si j apartin intervalului [1, K] si i != j
+	Acest set va produce N*(K*(K - 1)/2) clauze in O(N*(K*(K - 1)/2)).
+	
+	- doua noduri care au o muchie intre ele nu pot fi colorate cu aceeasi
+	culoare:
+	~(P(v, i) & P(u, i)) = true, unde v si u apartin intervalului [1, N] si
+	v != u, iar i apartine intervalului [1, K]
+	Acest set va produce M * K clauze in O(N*N*K).
+	
+    Complexitate: 
+	
+	- Matricea de adiacenta se construieste in O(M).
+	- Matricea P se construieste in O(N * K)
+	- Pentru a formula clauzele complexitatea este O(N*K + N*K*(K-1)/2 + 
+	N*N*K)
+	- Complexitatea oracolului este O(2^(N*K)).
+	- Complexitatea aflarii rezultatului este O(N + N*K) (O(N) pentru 
+	citirea raspunsului oracolului si O(N*K) pentru verificarea matricei de
+	variabile)
+	
+	Se ajunge, in total, la o complexitate O(N + M + N*K(N + K) + 2^(N*K)).
+	
+		
+2. Investigarea familiilor exitinse
+	
+	Aceasta problema poate fi vazuta ca problema clicii. Am redus aceasta
+problema la SAT astfel: am construit o matrice de booleans X (numita in cod
+variables) cu K linii, unde K este dimensiunea clicii cerute, si N coloane cu
+semnificatia ca daca K(i, j) == true, atunci nodul j are indexul i in clica
+gasita. Am tinut cont de urmatoarele de reguli:
+	- pe un index al clicii trebuie sa existe macar un nod:
+	X(i, 1) | X(i, 2) | ... | X(i, N) = true
+	Acest set va produce K clauze in O(K*N).
+	
+	- doua noduri intre care nu exista o muchie nu pot face parte din
+	aceeasi clica:
+	~(X(i, v) & X(j, u)) = true, unde v si u sunt noduri fara muchie intre
+	ele, iar i si j apartin intervalului [1, K] si i != j
+	Acest set va produce (N*(N-1)/2 - M) * K(K - 1) clauze in 
+	O((N*(N-1)/2 - M) * K(K - 1)).
+	
+	- un nod nu poate ocupa 2 indecsi intr-o clica si pe un index va fi
+	mereu un singur nod
+	1) ~(X(i, v) & X(j, v)) = true, unde i si j aparint [1, K] si i != j si
+	v apartine [1, N]
+	2) ~(X(i, v) & X(i, u)) = true, unde i aparitne [1, K], iar v si u
+	apartin [1, N] si v != u.
+	Acest set va produce N*K*(K - 1)/2 + K*N*(N - 1)/2 in 
+	O(N*K*(K - 1)/2 + K*N*(N - 1)/2).
+	
+   Complexitate:
+	- Matricea de adiacenta se construieste in O(M).
+	- Matricea X se construieste in O(N * K)
+	- Pentru a formula clauzele complexitatea este O(N*K*(N*K + N + K) - 
+	M*K*K)
+	- Complexitatea oracolului este O(2^(N*K)).
+	- Complexitatea aflarii rezultatului este O(K + N*K) (O(K) pentru 
+	citirea raspunsului oracolului si O(N*K) pentru verificarea matricei de
+	variabile)
+	
+	Se ajunge, in total, la o complexitate O(N + K + M + N*K*(N*K + K + N) - 
+	M*K*K + 2^(N*K)).
+	
+3. Arestarea mafiotilor
+	
+	Aceasta problema a fost redusa la problema clicii rezolvata la taskul
+anterior astfel: am construit graful complementar si am incercat gasirea unei
+clici de dimensiune maxima in acest graf complementar. Nodurile care nu apartin
+clicii sunt nodurile care trebuie eliminate (familiile arestate) deoarece in
+graful initial acestea sunt nodurile care nu au muchii intre ele.
+	
+    Complexitate:
+	- Matricea de adiacenta se construieste in O(M).
+	- Graful complementar se construieste in O(N*(N - 1)/2).
+	- Se apeleaza metoda de la taskul 2 de maxim N ori, deci complexitatea
+	va fi O(N*(N + K + M + N*K*(N*K + K + N) - M*K*K + 2^(N*K))) si o voi
+	nota O(N * task2_complexity)
+	- Extragerea rezultatului de la task are complexitatea O(N)
+	- Adaugare in lista are complexitatea O(N)
+	- Scrierea rezultatului final are complexitatea O(N)
+	
+	Se ajunge, in total, la complexitatea O(M + N*N + N * task2_complexity)
+
